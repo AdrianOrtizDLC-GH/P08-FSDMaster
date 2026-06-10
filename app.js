@@ -1,11 +1,16 @@
 const express = require('express');
-
+const cors = require('cors');
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('API funcionando');
-});
+app.use(cors());
+app.use(express.json());
+
+const postRoutes = require('./routes/posts');
+const autorRoutes = require('./routes/autores');
+
+app.use('/api/posts', postRoutes);
+app.use('/api/autores', autorRoutes);
 
 app.listen(3000, () => {
-    console.log('Servidor iniciado');
+    console.log('Servidor corriendo en puerto 3000');
 });
